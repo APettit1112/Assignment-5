@@ -6,6 +6,18 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(express.json());
 
+// Request-logging middleware: method, URL, timestamp, and body for POST/PUT
+app.use((req, res, next) => {
+  const { method, originalUrl } = req;
+  const timestamp = new Date().toISOString();
+  const parts = [`[${timestamp}]`, method, originalUrl];
+  if (method === 'POST' || method === 'PUT') {
+    parts.push('Body: ' + JSON.stringify(req.body));
+  }
+  console.log(parts.join(' | '));
+  next();
+});
+
 // Data for the server
 const menuItems = [
   {
@@ -130,5 +142,5 @@ app.delete('/api/menu/:id', (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
+  console.log(`Server listening on port ${3000}`);
 });
