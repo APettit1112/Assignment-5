@@ -1,0 +1,165 @@
+{
+  "info": {
+    "name": "Restaurant API",
+    "_postman_id": "restaurant-api-collection",
+    "description": "Collection for the Restaurant API (menu endpoints)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get All Menu Items",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/menu",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api","menu"]
+        },
+        "description": "Retrieve all menu items"
+      },
+      "response": [
+        {
+          "name": "200 OK - All items",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:3000/api/menu"
+          },
+          "status": "OK",
+          "code": 200,
+          "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"Classic Burger\",\n    \"description\": \"Beef patty with lettuce, tomato, and cheese on a sesame seed bun\",\n    \"price\": 12.99,\n    \"category\": \"entree\",\n    \"ingredients\": [\"beef\", \"lettuce\", \"tomato\", \"cheese\", \"bun\"],\n    \"available\": true\n  },\n  {\n    \"id\": 2,\n    \"name\": \"Chicken Caesar Salad\",\n    \"description\": \"Grilled chicken breast over romaine lettuce with parmesan and croutons\",\n    \"price\": 11.5,\n    \"category\": \"entree\",\n    \"ingredients\": [\"chicken\", \"romaine lettuce\", \"parmesan cheese\", \"croutons\", \"caesar dressing\"],\n    \"available\": true\n  },\n  {\n    \"id\": 3,\n    \"name\": \"Mozzarella Sticks\",\n    \"description\": \"Crispy breaded mozzarella served with marinara sauce\",\n    \"price\": 8.99,\n    \"category\": \"appetizer\",\n    \"ingredients\": [\"mozzarella cheese\", \"breadcrumbs\", \"marinara sauce\"],\n    \"available\": true\n  },\n  {\n    \"id\": 4,\n    \"name\": \"Chocolate Lava Cake\",\n    \"description\": \"Warm chocolate cake with molten center, served with vanilla ice cream\",\n    \"price\": 7.99,\n    \"category\": \"dessert\",\n    \"ingredients\": [\"chocolate\", \"flour\", \"eggs\", \"butter\", \"vanilla ice cream\"],\n    \"available\": true\n  },\n  {\n    \"id\": 5,\n    \"name\": \"Fresh Lemonade\",\n    \"description\": \"House-made lemonade with fresh lemons and mint\",\n    \"price\": 3.99,\n    \"category\": \"beverage\",\n    \"ingredients\": [\"lemons\", \"sugar\", \"water\", \"mint\"],\n    \"available\": true\n  },\n  {\n    \"id\": 6,\n    \"name\": \"Fish and Chips\",\n    \"description\": \"Beer-battered cod with seasoned fries and coleslaw\",\n    \"price\": 14.99,\n    \"category\": \"entree\",\n    \"ingredients\": [\"cod\", \"beer batter\", \"potatoes\", \"coleslaw\", \"tartar sauce\"],\n    \"available\": false\n  }\n]"
+        },
+        {
+          "name": "404 Not Found - empty",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:3000/api/menu"
+          },
+          "status": "Not Found",
+          "code": 404,
+          "body": "{ \"error\": \"Menu not found\" }"
+        }
+      ]
+    },
+    {
+      "name": "Get Menu Item by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/menu/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api","menu","1"]
+        },
+        "description": "Retrieve a specific menu item by id"
+      },
+      "response": [
+        {
+          "name": "200 OK - Item",
+          "originalRequest": { "method": "GET", "url": "http://localhost:3000/api/menu/1" },
+          "status": "OK",
+          "code": 200,
+          "body": "{ \"id\": 1, \"name\": \"Classic Burger\", \"description\": \"Beef patty with lettuce, tomato, and cheese on a sesame seed bun\", \"price\": 12.99, \"category\": \"entree\", \"ingredients\": [\"beef\",\"lettuce\",\"tomato\",\"cheese\",\"bun\"], \"available\": true }"
+        },
+        {
+          "name": "404 Not Found - missing",
+          "originalRequest": { "method": "GET", "url": "http://localhost:3000/api/menu/999" },
+          "status": "Not Found",
+          "code": 404,
+          "body": "{ \"error\": \"Menu item not found\" }"
+        }
+      ]
+    },
+    {
+      "name": "Create Menu Item (POST)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Veggie Wrap\",\n  \"description\": \"Grilled vegetables and hummus in a whole wheat wrap\",\n  \"price\": 9.5,\n  \"category\": \"entree\",\n  \"ingredients\": [\"zucchini\", \"pepper\", \"hummus\", \"wrap\"],\n  \"available\": true\n}"
+        },
+        "url": { "raw": "http://localhost:3000/api/menu", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api","menu"] },
+        "description": "Add a new menu item. Example request body provided."
+      },
+      "response": [
+        {
+          "name": "201 Created - new item",
+          "originalRequest": { "method": "POST", "url": "http://localhost:3000/api/menu", "body": { "mode": "raw" } },
+          "status": "Created",
+          "code": 201,
+          "body": "{ \"id\": 7, \"name\": \"Veggie Wrap\", \"description\": \"Grilled vegetables and hummus in a whole wheat wrap\", \"price\": 9.5, \"category\": \"entree\", \"ingredients\": [\"zucchini\",\"pepper\",\"hummus\",\"wrap\"], \"available\": true }"
+        },
+        {
+          "name": "400 Bad Request - invalid payload",
+          "originalRequest": { "method": "POST", "url": "http://localhost:3000/api/menu" },
+          "status": "Bad Request",
+          "code": 400,
+          "body": "{ \"error\": \"Invalid payload: `name` and numeric `price` required\" }"
+        }
+      ]
+    },
+    {
+      "name": "Update Menu Item (PUT)",
+      "request": {
+        "method": "PUT",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Classic Burger (Double)\",\n  \"price\": 15.99\n}"
+        },
+        "url": { "raw": "http://localhost:3000/api/menu/1", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api","menu","1"] },
+        "description": "Update an existing menu item. Example request body provided."
+      },
+      "response": [
+        {
+          "name": "200 OK - updated",
+          "originalRequest": { "method": "PUT", "url": "http://localhost:3000/api/menu/1" },
+          "status": "OK",
+          "code": 200,
+          "body": "{ \"id\": 1, \"name\": \"Classic Burger (Double)\", \"description\": \"Beef patty with lettuce, tomato, and cheese on a sesame seed bun\", \"price\": 15.99, \"category\": \"entree\", \"ingredients\": [\"beef\",\"lettuce\",\"tomato\",\"cheese\",\"bun\"], \"available\": true }"
+        },
+        {
+          "name": "404 Not Found - missing",
+          "originalRequest": { "method": "PUT", "url": "http://localhost:3000/api/menu/999" },
+          "status": "Not Found",
+          "code": 404,
+          "body": "{ \"error\": \"Menu item not found\" }"
+        }
+      ]
+    },
+    {
+      "name": "Delete Menu Item",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": { "raw": "http://localhost:3000/api/menu/1", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api","menu","1"] },
+        "description": "Remove a menu item by id"
+      },
+      "response": [
+        {
+          "name": "200 OK - removed",
+          "originalRequest": { "method": "DELETE", "url": "http://localhost:3000/api/menu/1" },
+          "status": "OK",
+          "code": 200,
+          "body": "{ \"message\": \"Menu item removed\", \"item\": { \"id\": 1, \"name\": \"Classic Burger\" } }"
+        },
+        {
+          "name": "404 Not Found - missing",
+          "originalRequest": { "method": "DELETE", "url": "http://localhost:3000/api/menu/999" },
+          "status": "Not Found",
+          "code": 404,
+          "body": "{ \"error\": \"Menu item not found\" }"
+        }
+      ]
+    }
+  ]
+}
